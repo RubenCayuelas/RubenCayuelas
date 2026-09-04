@@ -9,8 +9,5 @@
     media="(prefers-color-scheme: light)"
     srcset="https://raw.githubusercontent.com/RubenCayuelas/RubenCayuelas/output/github-snake.svg"
   />
-  <img
-    src="https://raw.githubusercontent.com/RubenCayuelas/RubenCayuelas/output/github-snake.svg"
-    alt="GitHub contribution snake"
-  />
+  <img src="https://raw.githubusercontent.com/RubenCayuelas/RubenCayuelas/output/github-snake.svg" />
 </picture>
