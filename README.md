@@ -1,3 +1,2 @@
 ## Hi there 👋
-![snake animation](https://github.com/RubenCayuelas/RubenCayuelas/blob/output/github-contribution-grid-snake2.svg)
-
+![GitHub Snake](https://raw.githubusercontent.com/RubenCayuelas/RubenCayuelas/output/github-contribution-grid-snake2.svg)
