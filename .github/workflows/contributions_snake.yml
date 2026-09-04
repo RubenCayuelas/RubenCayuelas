@@ -14,22 +14,17 @@ jobs:
 
     steps:
       - name: Generate Snake
-        uses: Sutil/snk@master
+        uses: Platane/snk/svg-only@v3
         with:
           github_user_name: ${{ github.repository_owner }}
-          svg_out_path: dist/github-contribution-grid-snake2.svg
-          snake_color: 'blue'
+          outputs: |
+            dist/github-contribution-grid-snake2.svg?palette=github
 
-      - name: Publish Snake
-        run: |
-          git config --global user.name "github-actions[bot]"
-          git config --global user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-          git clone --branch output https://x-access-token:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}.git output
-
-          cp dist/github-contribution-grid-snake2.svg output/
-
-          cd output
-          git add github-contribution-grid-snake2.svg
-          git commit -m "Update snake" || exit 0
-          git push
+      - name: Push to output branch
+        uses: crazy-max/ghaction-github-pages@v5
+        with:
+          build_dir: dist
+          target_branch: output
+          keep_history: false
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
