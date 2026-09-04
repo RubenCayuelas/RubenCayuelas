@@ -2,7 +2,7 @@ name: Metrics
 
 on:
   schedule:
-    - cron: "0 0 * * *"     # actualiza una vez al día
+    - cron: "0 0 * * *"
   workflow_dispatch:
   push:
     branches: ["main"]
@@ -13,7 +13,6 @@ jobs:
     permissions:
       contents: write
     steps:
-      # Métricas generales del perfil (commits, lenguajes, actividad...)
       - name: Metrics generales
         uses: lowlighter/metrics@latest
         with:
@@ -22,18 +21,25 @@ jobs:
           user: RubenCayuelas
           template: classic
           base: header, activity, community, repositories, metadata
-          plugin_followup: yes
-          plugin_followup_sections: repositories
           repositories: 1000
           repositories_forks: yes
-# Plugin de topics: muestra los topics de GitHub que tienes marcados con estrella
-      - name: Starred topics
+ 
+      - name: Contributions calendar
         uses: lowlighter/metrics@latest
         with:
-          token: NOT_NEEDED
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: RubenCayuelas
           base: ""
-          filename: metrics.plugin.topics.svg
-          plugin_topics: yes
-          plugin_topics_mode: icons     # labels/icons
-          plugin_topics_sort: stars
-          plugin_topics_limit: 12
+          filename: metrics.plugin.isocalendar.svg
+          plugin_isocalendar: yes
+          plugin_isocalendar_duration: half-year
+ 
+      - name: Issues and pull requests status
+        uses: lowlighter/metrics@latest
+        with:
+          token: ${{ secrets.METRICS_TOKEN }}
+          user: RubenCayuelas
+          base: ""
+          filename: metrics.plugin.followup.svg
+          plugin_followup: yes
+          plugin_followup_sections: repositories
